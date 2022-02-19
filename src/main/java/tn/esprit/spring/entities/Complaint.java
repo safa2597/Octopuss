@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -33,5 +36,8 @@ public class Complaint implements Serializable{
 	private String object;
 	private String textC;
 	private Date sendDate;
+	@Enumerated(EnumType.STRING)
 	private StatReclamation status;
+	@ManyToOne
+	private User user;
 }

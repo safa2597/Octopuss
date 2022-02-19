@@ -1,15 +1,14 @@
 package tn.esprit.spring.entities;
 
-
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,14 +27,13 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Moneypot {
+public class Profile implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idJack;
-	private float moneyCollected;
-	private String rib;
-	private float moneySpend;
-	@ManyToMany(mappedBy="moneypots",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	private Set<User> users;
-
+	private long idProfile;
+	private String domaine;
+	private String educationLevel;
+	private Date promotionYear;
+	@OneToOne(mappedBy="profile")
+	private User user;
 }

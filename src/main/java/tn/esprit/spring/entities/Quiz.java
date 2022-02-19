@@ -1,11 +1,16 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,5 +34,11 @@ public class Quiz implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idQuiz;
 	private int score;
+	@ManyToOne
+	private Training training;
+	@OneToMany(mappedBy="quiz",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Question> questions;
+	@OneToMany(mappedBy="quiz",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Response> responses;
 
 }

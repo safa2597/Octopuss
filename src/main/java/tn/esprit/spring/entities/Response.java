@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,7 @@ public class Response implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idR;
 	private String textR;
+	@ManyToOne
+	private Quiz quiz;
 
 }

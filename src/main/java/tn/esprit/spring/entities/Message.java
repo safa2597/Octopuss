@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -34,4 +35,6 @@ public class Message implements Serializable{
 	private Date dateM;
 	private User sender;
 	private User receiver;
+	@ManyToOne
+	private Chat chat;
 }

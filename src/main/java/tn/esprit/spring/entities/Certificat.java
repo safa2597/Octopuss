@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,7 @@ public class Certificat implements Serializable{
 	private String title;
 	private Date dateCertif;
 	private String cachet;
+	@ManyToOne
+	private User user;
 
 }

@@ -1,11 +1,16 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,5 +36,11 @@ public class Training implements Serializable{
 	private String title;
 	private String domaine;
 	private float price;
+	@ManyToMany(mappedBy="trainings",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<User> users;
+	@OneToMany(mappedBy="training",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Quiz> quizs;
+	@OneToMany(mappedBy="training",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Material> materials;
 
 }

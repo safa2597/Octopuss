@@ -2,11 +2,16 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,4 +36,8 @@ public class Chat implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idChat;
 	private Date dateF;
+	@ManyToMany(mappedBy="chats",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<User> users;
+	@OneToMany(mappedBy="chat",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Message> messages;
 }

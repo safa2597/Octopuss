@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,6 +34,9 @@ public class Comment implements Serializable{
 	private long idComment;
 	private String content;
 	private Date pubDate;
+	@Enumerated(EnumType.STRING)
 	private CommentRating rate;
+	@ManyToOne
+	private Subject subject;
 	
 }

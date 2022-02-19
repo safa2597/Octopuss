@@ -2,11 +2,15 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -35,4 +39,6 @@ public class Event implements Serializable{
 	private String description;
 	private int nbPlaces;
 	private int nbParticipation;
+	@ManyToMany(mappedBy="events",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<User> users;
 }
