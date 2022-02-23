@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,10 +38,13 @@ public class Quiz implements Serializable{
 	private long idQuiz;
 	private int score;
 	@ManyToOne
+	@JsonBackReference
 	private Training training;
-	@OneToMany(mappedBy="quiz",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Question> questions;
-	@OneToMany(mappedBy="quiz",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Response> responses;
 
 }

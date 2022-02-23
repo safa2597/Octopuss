@@ -31,7 +31,5 @@ public class Response implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idR;
 	private String textR;
-	@ManyToOne
-	private Quiz quiz;
 
 }

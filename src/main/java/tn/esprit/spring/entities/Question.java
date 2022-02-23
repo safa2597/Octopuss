@@ -31,7 +31,5 @@ public class Question implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idQ;
 	private String textQ;
-	@ManyToOne
-	private Quiz quiz;
 
 }

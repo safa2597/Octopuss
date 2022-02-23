@@ -1,0 +1,59 @@
+package tn.esprit.spring.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import tn.esprit.spring.entities.Certificat;
+import tn.esprit.spring.entities.Quiz;
+import tn.esprit.spring.entities.Training;
+import tn.esprit.spring.entities.User;
+import tn.esprit.spring.repositories.CertificatRepository;
+import tn.esprit.spring.repositories.UserRepository;
+
+@Service
+public class CertificatService implements ICertificatService{
+	@Autowired 
+	CertificatRepository cr;
+	@Autowired
+	UserRepository ur;
+
+	@Override
+	public Certificat addCertificat(Certificat c) {
+		return cr.save(c);
+	}
+
+	@Override
+	public Certificat updateCertificat(Certificat c) {
+		return cr.save(c);
+	}
+
+	@Override
+	public List<Certificat> findCertificats() {
+		return (List<Certificat>)cr.findAll();
+	}
+
+	@Override
+	public void deleteCertificat(Long idCertif) {
+		cr.deleteById(idCertif);
+		
+	}
+
+	@Override
+	public void deleteCertificat(Certificat c) {
+		cr.delete(c);
+		
+	}
+
+	@Override
+	public void affecterCertificattoUser(Long idUser, Long idCertif) {
+		User user = ur.findById(idUser).orElse(null);
+		System.out.print(user);
+		Certificat certificat = cr.findById(idCertif).orElse(null);
+		certificat.setUser(user);
+		cr.save(certificat);
+		
+	}
+
+}

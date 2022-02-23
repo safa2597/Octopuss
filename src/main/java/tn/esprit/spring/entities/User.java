@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +28,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class User implements Serializable{
 	
 	@Id
@@ -53,6 +54,7 @@ public class User implements Serializable{
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Training> trainings;
 	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Certificat> certificats;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Event> events;
@@ -63,7 +65,7 @@ public class User implements Serializable{
 	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Availability> availabilities;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	private Set<Add> adds;
+	private Set<Pub> pubs;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Offre> offres;
 	@OneToOne

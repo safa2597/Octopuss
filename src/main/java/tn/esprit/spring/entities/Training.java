@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,7 +29,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Training implements Serializable{
 	@Id
@@ -37,9 +38,12 @@ public class Training implements Serializable{
 	private String domaine;
 	private float price;
 	@ManyToMany(mappedBy="trainings",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	
 	private Set<User> users;
 	@OneToMany(mappedBy="training",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Quiz> quizs;
+	@JsonManagedReference
 	@OneToMany(mappedBy="training",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Material> materials;
 

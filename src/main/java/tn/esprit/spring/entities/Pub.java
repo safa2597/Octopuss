@@ -24,17 +24,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Add implements Serializable{
+public class Pub implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idAdd;
+	private long id;
 	private String pubDesc;
 	private Date startDate;
 	private Date finishDate;
 	private int nbInitView;
 	private int nbAchiveView;
 	private float cost;
-	@ManyToMany(mappedBy="adds",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy="pubs",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<User> users;
 }
