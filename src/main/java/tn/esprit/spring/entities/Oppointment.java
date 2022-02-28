@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString
 public class Oppointment implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idOp;
 	private Date opDate;
 	@ManyToOne

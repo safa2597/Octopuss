@@ -33,7 +33,7 @@ import lombok.experimental.FieldDefaults;
 public class Chat implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idChat;
 	private Date dateF;
 	@ManyToMany(mappedBy="chats",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)

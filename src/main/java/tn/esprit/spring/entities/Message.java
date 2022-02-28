@@ -29,7 +29,7 @@ import lombok.experimental.FieldDefaults;
 public class Message implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idM;
 	private String message;
 	private Date dateM;

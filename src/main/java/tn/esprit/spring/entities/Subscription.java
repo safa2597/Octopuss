@@ -26,7 +26,7 @@ import lombok.ToString;
 @ToString
 public class Subscription implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idSub;
 	private String badge;
 	private Date subDate;

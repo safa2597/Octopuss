@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Question;
-import tn.esprit.spring.entities.Quiz;
 import tn.esprit.spring.entities.Response;
-import tn.esprit.spring.repositories.QuizRepository;
+import tn.esprit.spring.repositories.QuestionRepository;
 import tn.esprit.spring.repositories.ResponseRepository;
 
 @Service
@@ -17,7 +16,7 @@ public class ResponseService implements IResponseService{
 	@Autowired
 	ResponseRepository rr;
 	@Autowired
-	QuizRepository quizr;
+	QuestionRepository qr;
 	@Override
 	public Response addResponse(Response Response) {
 		
@@ -49,9 +48,9 @@ public class ResponseService implements IResponseService{
 	@Override
 	public void affecterResponseaQuiz(Long idR, Long idQuiz) {
 		Response response = rr.findById(idR).orElse(null);
-		Quiz quiz = quizr.findById(idQuiz).orElse(null);
-		quiz.getResponses().add(response);
-		quizr.save(quiz);
+		Question question = qr.findById(idQuiz).orElse(null);
+		question.getResponses().add(response);
+		qr.save(question);
 		
 	}
 

@@ -28,7 +28,7 @@ import lombok.ToString;
 @ToString
 public class Availability implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idDis;
 	@Enumerated(EnumType.STRING)
 	private Days day;

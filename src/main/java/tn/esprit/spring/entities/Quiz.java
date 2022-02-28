@@ -34,7 +34,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Quiz implements Serializable{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idQuiz;
 	private int score;
 	@ManyToOne
@@ -43,8 +43,6 @@ public class Quiz implements Serializable{
 	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Set<Question> questions;
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JsonManagedReference
-	private Set<Response> responses;
+	
 
 }
