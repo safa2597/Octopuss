@@ -2,21 +2,21 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.FieldDefaults;
 
 @Entity
 @Getter
@@ -24,17 +24,17 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class Message implements Serializable{
+public class Pub implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idM;
-	private String message;
-	private Date dateM;
-	private User sender;
-	private User receiver;
-	@ManyToOne
-	private Chat chat;
+	private long id;
+	private String pubDesc;
+	private Date startDate;
+	private Date finishDate;
+	private int nbInitView;
+	private int nbAchiveView;
+	private float cost;
+	@ManyToMany(mappedBy="pubs",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<User> users;
 }

@@ -2,34 +2,37 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import lombok.AccessLevel;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.FieldDefaults;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idUser;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	private String firstname;
 	private String lastname;
 	private Date birthDate;
@@ -37,12 +40,37 @@ public class User implements Serializable{
 	private String address;
 	private String telnumber;
 	private String sex;
-	private String username;
+	private String userName;
 	private String password;
-	private String domaine;
-	private String role;
-	private String educationLevel;
-	private Date promotionYear;
-	
+	private Boolean active;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Role> roles;
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Complaint> complaints;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Chat> chats;
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Subject> subjects;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Training> trainings;
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private Set<Certificat> certificats;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Event> events;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Moneypot> moneypots;
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Oppointment> oppointments;
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Availability> availabilities;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Pub> pubs;
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Offre> offres;
+	@OneToOne
+	private Profile profile;
+	@ManyToOne
+	private Subscription subscription;
 
 }

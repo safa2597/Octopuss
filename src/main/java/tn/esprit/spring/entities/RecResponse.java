@@ -1,13 +1,11 @@
 package tn.esprit.spring.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -26,15 +24,11 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Message implements Serializable{
-
+public class RecResponse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idM;
-	private String message;
-	private Date dateM;
-	private User sender;
-	private User receiver;
-	@ManyToOne
-	private Chat chat;
+	private long idRep;
+	private String content;
+	private Date pubDate;
+
 }
