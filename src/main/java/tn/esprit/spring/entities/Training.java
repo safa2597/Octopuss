@@ -46,5 +46,8 @@ public class Training implements Serializable{
 	@JsonManagedReference
 	@OneToMany(mappedBy="training",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Material> materials;
+	@OneToMany(mappedBy="training",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JsonManagedReference
+	private Set<File> files;
 
 }
