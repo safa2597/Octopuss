@@ -2,7 +2,7 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,7 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
@@ -33,20 +37,26 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@FieldDefaults(level = AccessLevel.PRIVATE)
+
+//@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Complaint implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idC;
+	private Long idC;
 	private String object;
 	private String textC;
 	private Date sendDate;
 	@Enumerated(EnumType.STRING)
-	private StatReclamation status;
+	StatReclamation status;
 	@ManyToOne
-	private User user;
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	@JsonManagedReference
-	private Set<RecResponse> recResponses;
+	@JsonIgnore
+	private User user;
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@JsonBackReference
+	private List<RecResponse> recResponses;
 }
