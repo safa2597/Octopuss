@@ -56,6 +56,19 @@ public class UserController {
 		List<User> listUser = userServ.getAllUser();
 		return listUser;
 	}
+	
+	@GetMapping("/get-all-users-Undeleted")
+	public List<User> getAllUndeleted() {
+		List<User> listUser = userServ.getUndeletedUser();
+		return listUser;
+	}
+	
+	@GetMapping("/get-all-users-deleted")
+	public List<User> getAlldeleted() {
+		List<User> listUser = userServ.getdeletedUser();
+		return listUser;
+	}
+	  
 
 	// http://localhost:8089/pi/user/get-user-by-id/2
 	@GetMapping("/get-user-by-id/{user-id}")
@@ -65,10 +78,12 @@ public class UserController {
 		return u;
 	}
 
-	// http://localhost:8089/pi/user/delete-user/2
-	@DeleteMapping("/delete-user/{user-id}")
-	public void deleteUser(@PathVariable("user-id") Long id) {
-		userServ.deleteUserById(id);
+	// http://localhost:8089/pi/user/locked-user/2
+	@PutMapping("/locked-user/{user-id}")
+	public void lockedUser(@PathVariable("user-id") Long id) {
+		userServ.lockedUser(id);
 	}
 
+	
+	
 }

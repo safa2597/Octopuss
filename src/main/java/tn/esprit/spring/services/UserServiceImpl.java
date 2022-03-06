@@ -1,5 +1,6 @@
 package tn.esprit.spring.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements IUserService {
 	public User addUser(User u) {
 		u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
 		u.setActive(true);
+		u.setDeleted(0);
 		return userRepo.save(u);
 	}
 	@Override
@@ -60,13 +62,30 @@ public class UserServiceImpl implements IUserService {
 	public void sendSimpleEmail(String toEmail, String body, String subject) {
 		SimpleMailMessage message= new SimpleMailMessage();
 		
-		message.setFrom("fatma.nagati@esprit.tn");
+		message.setFrom("mehdi.benabdallah.1@esprit.tn");
 		message.setTo(toEmail);
 		message.setText(body);
 		message.setSubject(subject);
 		mailSender.send(message);
 		System.out.println("Mail send ..");
 		
+	}
+	@Override
+	public void lockedUser(Long id) {
+
+		//Date date = new Date(System.currentTimeMillis());
+		User deletedUser = userRepo.findById(id).orElse(null);
+		//deletedUser.setDeletedAt(date);
+		deletedUser.setDeleted(1);
+		userRepo.save(deletedUser);
+	}
+	@Override
+	public List<User> getUndeletedUser() {
+		return userRepo.getUndeletedUser();
+	}
+	@Override
+	public List<User> getdeletedUser() {
+		return userRepo.getdeletedUser();
 	}
 
 

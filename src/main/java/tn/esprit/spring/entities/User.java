@@ -51,10 +51,10 @@ public class User implements Serializable{
 	private boolean active;
 	private boolean locked;
 	private boolean enabled;
-	private boolean deleted;
-	//private Timestamp createdAt;
-	//private Timestamp modifiedAt;
-	//private Timestamp deletedAt;
+	private int deleted;
+	private Timestamp createdAt;
+	private Timestamp modifiedAt;
+	private Timestamp deletedAt;
 	private String image;
 	private int warningNum;
 	
@@ -64,7 +64,7 @@ public class User implements Serializable{
 
 
 	public User(Long userId, String email, String firstName, String lastName, int nbPoints, String password,
-			String userName, Date birthDate, boolean active, boolean locked, boolean enabled, boolean deleted,
+			String userName, Date birthDate, boolean active, boolean locked, boolean enabled, int deleted,
 			String image, int warningNum, Set<Role> roles) {
 		super();
 		this.userId = userId;
