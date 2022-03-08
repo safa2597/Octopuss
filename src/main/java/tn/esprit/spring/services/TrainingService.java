@@ -70,4 +70,19 @@ public class TrainingService implements ITrainingService{
 		//sr.save(s);
 	}
 
+	@Override
+	public List<Training> suggererTraining() {
+		return tr.suggererTraining();
+	}
+	@Transactional
+	@Override
+	public int participer(Long id, Long idTrain){
+		User u = ur.findById(id).get();
+		Training t = tr.findById(idTrain).get();
+		u.getTrainings().add(t);
+		t.setNbParticipant(tr.compterParticipants(idTrain));
+		return tr.compterParticipants(idTrain);
+	}
+	
+
 }

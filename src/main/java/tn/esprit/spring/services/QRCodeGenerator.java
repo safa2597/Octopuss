@@ -1,4 +1,4 @@
-package tn.esprit.spring.entities;
+package tn.esprit.spring.services;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,10 +13,10 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 public class QRCodeGenerator {
 
-	public static void generateQRCodeImage(String text, int width, int height, String filePath)
+	public static void generateQRCodeImage(String text, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 150, 150);
 
         Path path = FileSystems.getDefault().getPath(filePath);
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
@@ -24,9 +24,9 @@ public class QRCodeGenerator {
     }
 	
 	
-	public static byte[] getQRCodeImage(String text, int width, int height) throws WriterException, IOException {
+	public static byte[] getQRCodeImage(String text) throws WriterException, IOException {
 	    QRCodeWriter qrCodeWriter = new QRCodeWriter();
-	    BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+	    BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 150, 150);
 	    
 	    ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
 	    MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);

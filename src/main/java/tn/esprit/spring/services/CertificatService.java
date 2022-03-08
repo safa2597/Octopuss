@@ -1,13 +1,14 @@
 package tn.esprit.spring.services;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Certificat;
-import tn.esprit.spring.entities.Quiz;
-import tn.esprit.spring.entities.Training;
 import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repositories.CertificatRepository;
 import tn.esprit.spring.repositories.UserRepository;
@@ -20,9 +21,14 @@ public class CertificatService implements ICertificatService{
 	UserRepository ur;
 
 	@Override
-	public Certificat addCertificat(Certificat c) {
+	@Transactional
+	public Certificat addCertificat(Certificat c, Long id) {
+		User user=ur.findById(id).get();
+		c.setUser(user);
 		return cr.save(c);
-	}
+
+	}	
+	
 
 	@Override
 	public Certificat updateCertificat(Certificat c) {
@@ -54,6 +60,11 @@ public class CertificatService implements ICertificatService{
 		certificat.setUser(user);
 		cr.save(certificat);
 		
+	}
+
+	@Override
+	public Certificat findCertificat(Long idCertificat) {
+		return cr.findById(idCertificat).get();
 	}
 
 }

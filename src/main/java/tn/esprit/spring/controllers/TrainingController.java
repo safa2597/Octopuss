@@ -52,5 +52,14 @@ public class TrainingController {
 		ts.affecterUserAFormation(id, idTrain);
 	}
 
+	@GetMapping("/suggerer-Trainings")
+	public List<Training> suggererTrainings() {
+	List<Training> listTrainings = ts.suggererTraining();
+	return listTrainings;
+	}
+	@PutMapping("/participer-a-formation/{id}/{id-tr}")
+	public int ParticiperAFormation(@PathVariable("id") Long id, @PathVariable("id-tr")Long idTrain){
+		return ts.participer(id, idTrain);
+	}
 
 }

@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.models.Model;
 import tn.esprit.spring.entities.Quiz;
 import tn.esprit.spring.services.IQuizService;
 
@@ -20,8 +22,8 @@ public class QuizController {
 	IQuizService qzs;
 
 	@PostMapping("/add-Quiz")
-	public Quiz addQuiz(@RequestBody Quiz qz) {
-	Quiz Quiz = qzs.addQuiz(qz);
+	public Quiz addQuiz(@RequestBody Quiz qz,@PathVariable("idTraining") Long idTraining) {
+	Quiz Quiz = qzs.addQuiz(qz,idTraining);
 	return Quiz;
 	}
 	
@@ -44,4 +46,12 @@ public class QuizController {
 	public void ajouterEtAffecterTrainingQuiz(@PathVariable("idTraining") Long idTraining,@PathVariable("idQuiz") Long idQuiz){
 		qzs.ajouterFormationEtaffecterListeQuizs(idTraining, idQuiz);
 	}
+	
+	@PostMapping("/submit")
+	public Quiz submit(@RequestBody Quiz quiz) {
+			quiz.setScore(qzs.getResult(quiz));
+			return qzs.updateQuiz(quiz);
+	}
+	
+	
 }

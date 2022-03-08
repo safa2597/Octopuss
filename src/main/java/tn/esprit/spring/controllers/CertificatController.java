@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Certificat;
-import tn.esprit.spring.entities.QRCodeGenerator;
+import tn.esprit.spring.services.QRCodeGenerator;
 import tn.esprit.spring.services.ICertificatService;
 
 @RestController
@@ -22,10 +22,12 @@ public class CertificatController {
 	@Autowired
 	ICertificatService cs;
 	
-	@PostMapping("/add-Certificat")
-	public Certificat addCertificat(@RequestBody Certificat c) {
-	Certificat Certificat = cs.addCertificat(c);
-	return Certificat;
+	@PostMapping("/add-Certificat/{user-id}")
+	public Certificat addCertificat(@RequestBody Certificat c,@PathVariable("user-id") Long id) throws Exception {
+	Certificat certificat = cs.addCertificat(c,id);
+	download(cs.findCertificat(certificat.getIdCertif()).getIdCertif());
+	certificat.setQRCertif(QR_CODE_IMAGE_PATH);
+	return cs.updateCertificat(certificat);
 	}
 	@DeleteMapping("/remove-Certificat/{Certificat-id}")
 	public void removeCertificat(@PathVariable("Certificat-id") Long idCertif) {
@@ -44,24 +46,20 @@ public class CertificatController {
 	public void affecterUserCertificat(@PathVariable("id-user") Long idUser,@PathVariable("id-certificat") Long idCertif){
 		cs.affecterCertificattoUser(idUser, idCertif);
 	}
-private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.png";
+	private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.png";
 
 	
-    @GetMapping(value = "/genrateAndDownloadQRCode/{codeText}/{width}/{height}")
+    @GetMapping(value = "/genrateAndDownloadQRCode/{Certificat-id}")
 		public void download(
-				@PathVariable("codeText") String codeText,
-				@PathVariable("width") Integer width,
-				@PathVariable("height") Integer height)
+				@PathVariable("Certificat-id") Long idCertif)
 			    throws Exception {
-			        QRCodeGenerator.generateQRCodeImage(codeText, width, height, QR_CODE_IMAGE_PATH);
+			        QRCodeGenerator.generateQRCodeImage(cs.findCertificat(idCertif).toString(), QR_CODE_IMAGE_PATH);
 			    }
 
-    @GetMapping(value = "/genrateQRCode/{codeText}/{width}/{height}")
+    @GetMapping(value = "/genrateQRCode/{Certificat-id}")
    	public ResponseEntity<byte[]> generateQRCode(
-   			@PathVariable("codeText") String codeText,
-   			@PathVariable("width") Integer width,
-   			@PathVariable("height") Integer height)
+   			@PathVariable("Certificat-id") Long idCertif)
    		    throws Exception {
-   		        return ResponseEntity.status(HttpStatus.OK).body(QRCodeGenerator.getQRCodeImage(codeText, width, height));
+   		        return ResponseEntity.status(HttpStatus.OK).body(QRCodeGenerator.getQRCodeImage(cs.findCertificat(idCertif).toString()));
    		    }
 }
