@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
@@ -30,15 +34,21 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
+@Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Question implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idQ;
-	private String textQ;
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JsonManagedReference
-	private Set<Response> responses;
+	private int quesId;
+	private String title;
+	private String optionA;
+	private String optionB;
+	private String optionC;
+	private int ans;
+	private int chose;
+	@ManyToOne
+	@JsonBackReference
+	@JsonIgnore
+	private Quiz quiz;
 
 }

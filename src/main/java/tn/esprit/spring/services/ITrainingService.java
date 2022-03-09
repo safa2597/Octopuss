@@ -14,5 +14,7 @@ public interface ITrainingService {
 	void deleteTraining(Training Training);
 	public void ajouterUserEtaffecterListeformations(User user, List<Long> idtraining);
 	public void affecterUserAFormation(Long id, Long idTrain);
+	public List<Training> suggererTraining();
+	public int participer(Long id, Long idTrain);
 
 }

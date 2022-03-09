@@ -1,11 +1,15 @@
 package tn.esprit.spring.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
 import tn.esprit.spring.entities.Training;
 import tn.esprit.spring.entities.User;
@@ -48,7 +52,6 @@ public class TrainingService implements ITrainingService{
 		
 	}
 	
-
 	@Override
 	public void ajouterUserEtaffecterListeformations(User user, List<Long> idtrainings) {
 		ur.save(user);
@@ -66,5 +69,20 @@ public class TrainingService implements ITrainingService{
 		u.getTrainings().add(t);
 		//sr.save(s);
 	}
+
+	@Override
+	public List<Training> suggererTraining() {
+		return tr.suggererTraining();
+	}
+	@Transactional
+	@Override
+	public int participer(Long id, Long idTrain){
+		User u = ur.findById(id).get();
+		Training t = tr.findById(idTrain).get();
+		u.getTrainings().add(t);
+		t.setNbParticipant(tr.compterParticipants(idTrain));
+		return tr.compterParticipants(idTrain);
+	}
+	
 
 }

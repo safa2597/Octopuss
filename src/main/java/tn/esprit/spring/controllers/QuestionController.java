@@ -21,8 +21,8 @@ public class QuestionController {
 	IQuestionService qs;
 
 	@PostMapping("/add-Question")
-	public Question addQuestion(@RequestBody Question m) {
-	Question Question = qs.addQuestion(m);
+	public Question addQuestion(@RequestBody Question q,@PathVariable("idQuiz") Long idQuiz) {
+	Question Question = qs.addQuestion(q,idQuiz);
 	return Question;
 	}
 	
