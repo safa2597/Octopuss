@@ -2,16 +2,12 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,7 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-
 @Entity
 @Getter
 @Setter
@@ -30,18 +25,12 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Event implements Serializable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idEvent;
-	private String evName;
-	private String place;
-	private Date dateEv;
-	private String description;
-	private int nbPlaces;
-	private int nbParticipation;
-	@ManyToMany(mappedBy="events",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	private Set<User> users;
-	@OneToOne
-	private Fiche fiche;
+public class Notification implements Serializable{
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+long id;
+String content;
+Date date;
+@ManyToOne
+private User user;
 }

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.stereotype.Component;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Component
 public class User implements Serializable{
 	
 	@Id
@@ -35,7 +38,7 @@ public class User implements Serializable{
 	private String firstname;
 	private String lastname;
 	private Date birthDate;
-	private String email;
+	public  String email;
 	private String address;
 	private String telnumber;
 	private String sex;
@@ -63,7 +66,7 @@ public class User implements Serializable{
 	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Availability> availabilities;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	private Set<Add> adds;
+	private Set<Ads> adds;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Offre> offres;
 	@OneToOne
