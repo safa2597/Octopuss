@@ -2,6 +2,7 @@ package tn.esprit.spring.controllers;
 
 import java.util.List;
 import javax.mail.MessagingException;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Event;
@@ -88,25 +90,24 @@ public String send() {
  * @return
  * @throws MessagingException
  */
-@RequestMapping("send-mail-attachment")
-public String sendWithAttachment() throws MessagingException {
+//@Scheduled(cron = "0 */1 0 * * *" )
+//@RequestMapping(value= "send-mail-attachment", method=RequestMethod.POST)
+/*public String sendWithAttachment() throws MessagingException {
 
-	/*
-	 * Creating a User with the help of User class that we have declared and setting
-	 * Email address of the sender.
-	 */
-	user.setEmail("sejir.bali@esprit.tn"); //Receiver's email address
+	user.setEmail("khoujasafa@gmail.com"); //Receiver's email address
 
-	/*
-	 * Here we will call sendEmailWithAttachment() for Sending mail to the sender
-	 * that contains a attachment.
-	 */
+	
 	try {
 		notificationService.sendEmailWithAttachment(user);
 	} catch (MailException mailException) {
 		System.out.println(mailException);
 	}
 	return "Congratulations! Your mail has been send to the user.";
+}*/
+
+@PostMapping("/sendEmail/{to}/{body}")
+public void sendEmail (@PathParam ("to") String toEmail,@PathParam ("body") String body){
+	notificationService.sendEmail(toEmail, body);
 }
 
 

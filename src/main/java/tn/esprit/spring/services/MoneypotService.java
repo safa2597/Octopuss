@@ -17,7 +17,6 @@ public class MoneypotService implements IMoneypotService {
 	MoneypotRepository mpr;
 	@Autowired
 	UserRepository ur;
-	
 
 	@Override
 	public Moneypot addMoneypot(Moneypot mp) {

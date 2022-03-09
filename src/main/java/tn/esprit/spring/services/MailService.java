@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -66,7 +67,7 @@ public class MailService {
 	 */
 	public void sendEmailWithAttachment(User user) throws MailException, MessagingException {
 
-		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		/*MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
@@ -77,8 +78,24 @@ public class MailService {
 		ClassPathResource classPathResource = new ClassPathResource("Attachment.pdf");
 		helper.addAttachment(classPathResource.getFilename(), classPathResource);
 
-		javaMailSender.send(mimeMessage);
+		javaMailSender.send(mimeMessage);*/
+		/*MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		        helper.setTo("khoujasafa@gmail.com");     
+		        helper.setSubject("À propos de votre réclamation sur le fichier ");
+		        helper.setText("", true);
+		        // Send Message!
+		        this.javaMailSender.send(message);*/
 	}
-
+	public void sendEmail(String toEmail, String body){
+		SimpleMailMessage message=new SimpleMailMessage();
+		message.setFrom("amani.methnani@esprit.tn");
+		message.setTo(toEmail);
+		message.setText("votre evenement sera bientot");
+		message.setSubject("evenement");
+		javaMailSender.send(message);
+	}
+	
+	
 
 }
