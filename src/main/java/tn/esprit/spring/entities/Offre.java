@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -37,6 +39,9 @@ public class Offre implements Serializable{
 	private String profile;
 	private Date datePost;
 	private int nbPosts;
+	private String centreInteret;
+
+	@JsonIgnore
 	@ManyToMany(mappedBy="offres",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<User> users;
 
