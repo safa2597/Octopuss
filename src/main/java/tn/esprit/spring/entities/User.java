@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -45,7 +46,8 @@ public class User implements Serializable{
 	private Boolean active;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Role> roles;
-	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Complaint> complaints;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Chat> chats;

@@ -11,7 +11,7 @@ public interface IComplaintService {
 	void addComplaint(Complaint c);
 	public void deleteComplaint(Long idC);
 	List<Complaint> findComplaints();
-	public Complaint updateComplaint(Complaint c);
+	public Complaint updateComplaint(Complaint c,Long id);
 	public void affecterComplainttoUser(Long idUser, Long idC);
 
 }

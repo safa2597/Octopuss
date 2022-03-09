@@ -8,6 +8,8 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,9 +72,9 @@ public class ComplaintController {
 		return ics.findComplaints();
 		}
 		
-		@PutMapping("/modify-Complaint")
-		public Complaint modifyComplaint(@RequestBody Complaint Complaint) {
-		return ics.updateComplaint(Complaint);
+		@PutMapping("/modify-Complaint/{id}")
+		public Complaint modifyComplaint(@RequestBody Complaint Complaint, @PathVariable ("id") Long id) {
+		return ics.updateComplaint(Complaint,id);
 		}
 		
 		@PutMapping("/affectUserComplaint/{id-user}/{id-complaint}")

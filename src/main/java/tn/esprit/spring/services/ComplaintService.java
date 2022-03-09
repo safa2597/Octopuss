@@ -32,7 +32,9 @@ public class ComplaintService implements IComplaintService{
 		return cr.findAll();
 	}
 	@Override
-	public Complaint updateComplaint(Complaint c) {
+	public Complaint updateComplaint(Complaint c,Long id) {
+		User user=ur.findById(id).get();
+		c.setUser(user);
 		return cr.save(c);
 	}
 		@Override
