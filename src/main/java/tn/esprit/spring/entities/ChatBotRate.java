@@ -1,36 +1,37 @@
 package tn.esprit.spring.entities;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Oppointment implements Serializable{
+@EqualsAndHashCode
+public class ChatBotRate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idOp;
-	private Date opDate;
+	private long idChatBotRate;
+	private int stars;
+	
 	@JsonIgnore
-	@ManyToOne
+	@OneToOne
 	private User user;
-	@JsonIgnore
-	@ManyToOne
-	private Expert expert;
 }

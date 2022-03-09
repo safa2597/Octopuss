@@ -1,13 +1,14 @@
 package tn.esprit.spring.entities;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,22 +16,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Oppointment implements Serializable{
+public class Expert {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idOp;
-	private Date opDate;
+	private long id;
+	private String nom;
+	private String expertType;
 	@JsonIgnore
-	@ManyToOne
-	private User user;
-	@JsonIgnore
-	@ManyToOne
-	private Expert expert;
+	@OneToMany(mappedBy="expert")
+	private List<Oppointment> oppointments;
+		
 }
