@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import tn.esprit.spring.entities.Profile;
 import tn.esprit.spring.entities.Training;
 
 public interface TrainingRepository extends CrudRepository<Training, Long>{
