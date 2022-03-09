@@ -2,11 +2,14 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Question;
 import tn.esprit.spring.entities.Quiz;
+import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repositories.QuestionRepository;
 import tn.esprit.spring.repositories.QuizRepository;
 
@@ -18,7 +21,9 @@ public class QuestionService implements IQuestionService{
 	@Autowired
 	QuizRepository quizr;
 	@Override
-	public Question addQuestion(Question q) {
+	public Question addQuestion(Question q,Long idQuiz) {
+		Quiz quiz=quizr.findById(idQuiz).get();
+		q.setQuiz(quiz);
 		return qr.save(q);
 	}
 
@@ -49,6 +54,15 @@ public class QuestionService implements IQuestionService{
 		Quiz quiz = quizr.findById(idQuiz).orElse(null);
 		quiz.getQuestions().add(question);
 		quizr.save(quiz);
+	}
+	
+	@Transactional
+	@Override
+	public void ajouterQuestionEtAffecterQuiz(Question q, Long idQuiz) {
+		
+		Quiz quiz=quizr.findById(idQuiz).get();
+		q.setQuiz(quiz);
+		qr.save(q);
 	}
 
 }

@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <style type='text/css'>
+            body, html {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                color: black;
+                display: table;
+                font-family: Georgia, serif;
+                font-size: 30px;
+                text-align: center;
+            }
+            .container {
+                border: 20px solid #C768C7;
+                width: 850px;
+                height: 663px;
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .logo {
+                color: #C768C7;
+            }
+
+            .marquee {
+                color: #C768C7;
+                font-size: 58px;
+                margin: 20px;
+            }
+            .assignment {
+                margin: 20px;
+            }
+            .person {
+                border-bottom: 2px solid black;
+                font-size: 42px;
+                font-style: italic;
+                margin: 20px auto;
+                width: 500px;
+            }
+            .reason {
+                margin: 20px;
+            }
+            .QR {
+                margin: 20px;
+                border: 1px solid #ddd;
+  				border-radius: 4px;
+  				padding: 1px;
+  				width: 150px;
+            }
+            .qr-container {
+            	display: flex;
+			    flex-direction: row;
+			    justify-content: flex-end;
+			}
+			.global {
+				text-align: center;
+			}
+        </style>
+    </head>
+    <body>
+    <div class="global">
+        <div class="container" style="border: 20px solid #C768C7;
+                width: 850px;
+                height: 663px;
+                display: table-cell;
+                vertical-align: middle;">
+            <div class="logo">
+                <img style="width: 150px" alt="" src="file:///C:/wamp64/www/Octopuss/src/main/resources/logoOctopuss.png"/>
+            </div>
+
+            <div class="marquee">
+                $title Certification 
+            </div>
+
+            <div class="assignment">
+                This certificate is presented to 
+            </div>
+
+            <div class="person">
+               $name $lastname
+            </div>
+
+            <div class="reason">
+                For deftly defying the laws of gravity<br/>
+                in $genDateTime
+            </div>
+            <div class="qr-container">
+	            <div class="QR">
+	                <img  style="width: 150px" alt="" src="file:///C:/wamp64/www/Octopuss/src/main/resources/QRCode.png"/>
+	            </div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>

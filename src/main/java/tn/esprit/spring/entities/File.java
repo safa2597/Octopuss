@@ -1,13 +1,16 @@
 package tn.esprit.spring.entities;
 
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,7 +21,9 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-@Entity
+
+
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,10 +31,18 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Response implements Serializable{
+@Entity
+@Table(name = "files")
+public class File {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idR;
-	private String textR;
-
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String idFile;
+    private String name;
+    private String type;
+    @Lob
+    private byte[] data;
+    @ManyToOne
+	@JsonBackReference
+    private Training training;
 }

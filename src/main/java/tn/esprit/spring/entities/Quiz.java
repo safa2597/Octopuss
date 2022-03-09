@@ -1,6 +1,7 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,26 +13,30 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor; 
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Quiz implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +45,11 @@ public class Quiz implements Serializable{
 	@ManyToOne
 	@JsonBackReference
 	private Training training;
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="quiz",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JsonManagedReference
-	private Set<Question> questions;
+	private List<Question> questions;
+	
+
 
 }

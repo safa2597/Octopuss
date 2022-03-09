@@ -1,5 +1,6 @@
 package tn.esprit.spring.controllers;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import tn.esprit.spring.entities.Training;
 import tn.esprit.spring.entities.User;
@@ -42,14 +46,20 @@ public class TrainingController {
 	List<Training> listTrainings = ts.findTrainings();
 	return listTrainings;
 	}
-	/*@PostMapping("/add-training/{idUsers}")
-	public void ajouterEtAffecterTrainingUsers(@RequestBody User user, @PathVariable("idTrainings")List<Long> idTrainings){
-		ts.ajouterUserEtaffecterListeformations(user, idTrainings);
-	}*/
+	
 	@PutMapping("/affecter-formation-user/{id}/{id-tr}")
 	public void affecterUserAFormation(@PathVariable("id") Long id, @PathVariable("id-tr")Long idTrain){
 		ts.affecterUserAFormation(id, idTrain);
 	}
 
+	@GetMapping("/suggerer-Trainings")
+	public List<Training> suggererTrainings() {
+	List<Training> listTrainings = ts.suggererTraining();
+	return listTrainings;
+	}
+	@PutMapping("/participer-a-formation/{id}/{id-tr}")
+	public int ParticiperAFormation(@PathVariable("id") Long id, @PathVariable("id-tr")Long idTrain){
+		return ts.participer(id, idTrain);
+	}
 
 }
