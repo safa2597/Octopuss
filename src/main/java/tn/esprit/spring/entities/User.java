@@ -44,31 +44,31 @@ public class User implements Serializable{
 	private String userName;
 	private String password;
 	private Boolean active;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Role> roles;
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Complaint> complaints;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Chat> chats;
-	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Subject> subjects;
 	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
 	private Set<Training> trainings;
-	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private Set<Certificat> certificats;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Event> events;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Moneypot> moneypots;
-	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Oppointment> oppointments;
-	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="user",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Availability> availabilities;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Pub> pubs;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private Set<Offre> offres;
 	@OneToOne
 	private Profile profile;
