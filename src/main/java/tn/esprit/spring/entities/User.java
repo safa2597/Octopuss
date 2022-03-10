@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Component
 public class User implements Serializable{
 	
 	@Id
@@ -37,7 +40,7 @@ public class User implements Serializable{
 	private String firstname;
 	private String lastname;
 	private Date birthDate;
-	private String email;
+	public  String email;
 	private String address;
 	private String telnumber;
 	private String sex;
