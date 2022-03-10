@@ -2,6 +2,7 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Profile implements Serializable{
 	private String domaine;
 	private String educationLevel;
 	private Date promotionYear;
-	private String centreInteret;
+	private List <String> centreInteret;
 	@JsonIgnore
 	@OneToOne(mappedBy="profile")
 	private User user;

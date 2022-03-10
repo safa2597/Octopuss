@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import tn.esprit.spring.entities.Offre;
 import tn.esprit.spring.entities.Profile;
 
 import tn.esprit.spring.services.IProfileServices;
@@ -58,6 +58,11 @@ public class ProfileController {
 	@GetMapping("/getPourcentage")
 	public float getPoucentage(){
 		return ips.pourcentageProfil();
+	}
+	
+	@GetMapping("/recomandation/{idProfile}")
+	public List<Offre> recomandation(Long idProfile){
+		return ips.recomandation(idProfile);
 	}
 	
 
