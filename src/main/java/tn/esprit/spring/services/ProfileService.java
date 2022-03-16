@@ -48,7 +48,7 @@ public class ProfileService implements IProfileServices{
 		return ((List<Profile>) pr.findAll()).size() * 100/dom;
 	}
 
-	public List<Offre> recomandation(Long idProfile){
+	/*public List<Offre> recomandation(Long idProfile){
 		List<Offre> ofList=new ArrayList<Offre>();
 		Profile p=pr.findById(idProfile).get();
 		for(String c:p.getCentreInteret()){
@@ -60,6 +60,6 @@ public class ProfileService implements IProfileServices{
 			}
 		}
 		return  ofList;
-	}
+	}*/
 
 }

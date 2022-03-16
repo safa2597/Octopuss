@@ -60,10 +60,10 @@ public class ProfileController {
 		return ips.pourcentageProfil();
 	}
 	
-	@GetMapping("/recomandation/{idProfile}")
+	/*@GetMapping("/recomandation/{idProfile}")
 	public List<Offre> recomandation(Long idProfile){
 		return ips.recomandation(idProfile);
-	}
+	}*/
 	
 
 }

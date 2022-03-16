@@ -11,5 +11,5 @@ public void deleteProfile(Long idProfile);
 List<Profile> getProfiles();
 void editProfiles(Profile profile);
 float pourcentageProfil();
-public List<Offre> recomandation(Long idProfile);
+//public List<Offre> recomandation(Long idProfile);
 }

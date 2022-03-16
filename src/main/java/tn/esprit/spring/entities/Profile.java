@@ -36,7 +36,7 @@ public class Profile implements Serializable{
 	private String domaine;
 	private String educationLevel;
 	private Date promotionYear;
-	private List <String> centreInteret;
+	//private List <String> centreInteret;
 	@JsonIgnore
 	@OneToOne(mappedBy="profile")
 	private User user;
